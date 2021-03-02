@@ -1,0 +1,6 @@
+
+.idea/
+
+backend/venv/
+
+backend/swir/__pycache__/
