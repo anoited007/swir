@@ -4,8 +4,7 @@ import React from "react";
 import {localBackend, remote, remoteBackend} from "../shared/sharedConstants";
 import * as yup from 'yup';
 import {useCookies} from "react-cookie";
-import {useRouter} from "next/router";
-import Redirect from "./redirect";
+import {useToasts} from "react-toast-notifications";
 
 const LoginForm = () => {
     let requiredMsg = 'This field is required';
@@ -15,6 +14,8 @@ const LoginForm = () => {
     })
 
     const [cookie, setCookie] = useCookies(['user'])
+    const {addToast} = useToasts();
+
 
     const handleLogin = (values) => {
         const baseUrl = remote ? remoteBackend : localBackend;
@@ -45,11 +46,19 @@ const LoginForm = () => {
                 //resort to native JS redirect since react hooks don't work in this scenario
                 window.location.href ='dashboard/'
             }
-        }).catch(response => {
-            console.error(response);
+            else {
+                throw new Error(response.statusText)
+            }
+        }).catch(error => {
+            console.log(error.message);
+            addToast(error.message, {
+                appearance:'error',
+                autoDismiss: true,
+            })
         })
     }
     return(
+
         <Formik
             initialValues={{
                 username: '',
@@ -66,6 +75,8 @@ const LoginForm = () => {
                 errors,
             }) => {
                 return(
+                    <>
+                        {/*<CustomToast message={apiError} appearance={'error'} />*/}
                     <Form method="POST" onSubmit={handleSubmit}>
                         <Form.Group controlId="formGroupUsername">
                             <Form.Control type="text" placeholder="Username" name="username" required
@@ -90,11 +101,13 @@ const LoginForm = () => {
 
                         <Button type="submit" variant="primary" className="mb-5"> Login </Button>
                     </Form>
+                    </>
                 );
             }
         }
 
         </Formik>
+
     )
 }
 

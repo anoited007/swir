@@ -1,10 +1,11 @@
 import {Card} from "react-bootstrap";
 import {jokeApi} from "../shared/sharedConstants";
 import React, {Component,} from "react";
+import Carousel from '../external/carousel';
 
 const RenderJoke = ({joke}) => {
     return(
-        <Card key={joke.id} className="mb-2">
+        <Card key={joke.id} className="mb-2" >
             <Card.Header>Category: {joke.type}</Card.Header>
             <Card.Body>
                 <Card.Title>Setup</Card.Title>
