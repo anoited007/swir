@@ -4,6 +4,8 @@ import React from "react";
 import {localBackend, remote, remoteBackend} from "../shared/sharedConstants";
 import * as yup from 'yup';
 import {useCookies} from "react-cookie";
+import {useRouter} from "next/router";
+import Redirect from "./redirect";
 
 const LoginForm = () => {
     let requiredMsg = 'This field is required';
@@ -32,15 +34,17 @@ const LoginForm = () => {
             credentials: "same-origin"
         }).then(response => {
             if (response.ok){
-                return response.json();
-            }
-        }).then(response => {
-           setCookie('user', response, {
-               path: "/",
-               maxAge: 3600,
-               sameSite: true,
-           })
+               const data = response.json();
+                setCookie('user', data, {
+                    path: "/",
+                    maxAge: 3600,
+                    sameSite: true,
+                })
+                // return <Redirect location='dashboard'/>
 
+                //resort to native JS redirect since react hooks don't work in this scenario
+                window.location.href ='dashboard/'
+            }
         }).catch(response => {
             console.error(response);
         })

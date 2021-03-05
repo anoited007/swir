@@ -1,5 +1,5 @@
 {
-  "name": "learn-starter",
+  "name": "sweir",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,5 +17,17 @@
     "react-cookie": "^4.0.3",
     "react-dom": "17.0.1",
     "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.2.0"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
   }
 }

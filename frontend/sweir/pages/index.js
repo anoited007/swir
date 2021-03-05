@@ -3,6 +3,7 @@ import React from "react";
 import {Container, Col, Row } from "react-bootstrap";
 import LoginForm from "../components/login";
 import SignUpForm from "../components/signup";
+import Footer from "../components/footer";
 
 const Home = () => {
         return (
@@ -31,9 +32,8 @@ const Home = () => {
 
                             </Col>
                         </Row>
-                        <footer>
-                            <p className="center"> Copyright Immanuel for SWEIR &copy; 2021</p>
-                        </footer>
+
+                        <Footer />
 
                     </Container>
 
