@@ -17,6 +17,7 @@
     "react-cookie": "^4.0.3",
     "react-dom": "17.0.1",
     "react-toast-notifications": "^2.4.3",
+    "swiper": "^6.5.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {

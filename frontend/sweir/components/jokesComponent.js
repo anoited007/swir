@@ -1,7 +1,6 @@
 import {Card} from "react-bootstrap";
 import {jokeApi} from "../shared/sharedConstants";
 import React, {Component,} from "react";
-import Carousel from '../external/carousel';
 
 const RenderJoke = ({joke}) => {
     return(
@@ -19,7 +18,7 @@ const RenderJoke = ({joke}) => {
 
 }
 
-class Jokes extends Component {
+class JokesComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,4 +49,4 @@ class Jokes extends Component {
 
 }
 
-export default Jokes
+export default JokesComponent

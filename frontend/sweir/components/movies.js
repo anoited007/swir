@@ -1,11 +1,18 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import {movieApi} from "../shared/sharedConstants";
+import {SwiperSlide, Swiper} from "swiper/react";
+import {Card} from "react-bootstrap";
+import 'swiper/swiper-bundle.min.css'
 
 const RenderMovie = ({movie}) => {
-    return null
+    return (
+        <SwiperSlide>
+            <p>{movie.attributes.titles.en}</p>
+        </SwiperSlide>
+    )
 }
 
-class Movies extends Component {
+class MovieComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,4 +48,4 @@ class Movies extends Component {
     }
 }
 
-export default Movies
+export default MovieComponent

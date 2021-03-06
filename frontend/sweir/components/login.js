@@ -76,7 +76,6 @@ const LoginForm = () => {
             }) => {
                 return(
                     <>
-                        {/*<CustomToast message={apiError} appearance={'error'} />*/}
                     <Form method="POST" onSubmit={handleSubmit}>
                         <Form.Group controlId="formGroupUsername">
                             <Form.Control type="text" placeholder="Username" name="username" required

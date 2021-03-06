@@ -1,4 +1,3 @@
-import  styles from './layout.module.css'
 import CustomNavbar from "./navbar";
 import Footer from "./footer";
 
