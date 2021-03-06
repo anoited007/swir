@@ -1,0 +1,14 @@
+.container-md{
+    max-width: 80vw !important;
+}
+.swiper-slide{
+    display: flex;
+    flex-direction: column;
+
+}
+
+@media (max-width:991px){
+    .swiper-slide, .swiper-slide-active{
+        width: 100% !important;
+    }
+}

@@ -14,14 +14,13 @@ const Home = () => {
                 </Head>
 
                 <main>
-                    <Container>
+                    <Container fluid>
                         <Row>
-                            <Col md={5} className="auth-left">
-                                <p>Hello</p>
-
+                            <Col md={4}  className={"auth-left"}>
+                                <p>Demo Application for SWEIR</p>
                             </Col>
 
-                            <Col md={7} className="auth-right">
+                            <Col md={{ span: 4, offset: 2 }} className={"auth-right"}>
                                 <h4>Do you already have an account?</h4>
                                 <h5>Sign In</h5>
                                 <LoginForm />

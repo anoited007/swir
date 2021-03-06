@@ -1,16 +1,11 @@
 import React, {Component} from "react";
 import {movieApi} from "../shared/sharedConstants";
 import {SwiperSlide, Swiper} from "swiper/react";
-import {Card} from "react-bootstrap";
+import {Card, Col, Container, Row} from "react-bootstrap";
 import 'swiper/swiper-bundle.min.css'
+import SwiperCore, {Navigation, Pagination} from "swiper";
+import styles from './movies.module.css'
 
-const RenderMovie = ({movie}) => {
-    return (
-        <SwiperSlide>
-            <p>{movie.attributes.titles.en}</p>
-        </SwiperSlide>
-    )
-}
 
 class MovieComponent extends Component {
     constructor(props) {
@@ -40,10 +35,39 @@ class MovieComponent extends Component {
     }
 
     render() {
+        SwiperCore.use([Navigation, Pagination ]);
         return(
-            this.state.movies.map( (movie, index) => (
-                <RenderMovie movie={movie} key={index}/>
-            ))
+            <Container fluid={"md"} className={styles.containerMd}>
+
+
+                        <Swiper
+                            className={"row"}
+                            spaceBetween={50}
+                            slidesPerView={3}
+                            navigation
+                            pagination={{ clickable: true }}
+                            scrollbar={{ draggable: true }}
+                        >
+                            { this.state.movies.map( (movie, index) => (
+                                <Col key={index}>
+                                <SwiperSlide key={index}    >
+                                    <Card className={styles.card}>
+                                    <Card.Img src={movie.attributes.coverImage === null ? movie.attributes.posterImage.original : movie.attributes.coverImage.original } variant="top" />
+                                    <Card.Body>
+                                        <Card.Title>Title: {movie.attributes.titles.en}</Card.Title>
+                                        <Card.Text>{movie.attributes.synopsis}</Card.Text>
+                                    </Card.Body>
+                                    </Card>
+                                </SwiperSlide>
+                                </Col>
+                            ))}
+
+                        </Swiper>
+
+
+
+
+           </Container>
         )
     }
 }

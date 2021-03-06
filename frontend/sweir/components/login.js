@@ -5,6 +5,10 @@ import {localBackend, remote, remoteBackend} from "../shared/sharedConstants";
 import * as yup from 'yup';
 import {useCookies} from "react-cookie";
 import {useToasts} from "react-toast-notifications";
+import styles from '../styles/login.module.css'
+
+//Todo: Fix error feedback to user
+//Todo: fix CSS
 
 const LoginForm = () => {
     let requiredMsg = 'This field is required';
