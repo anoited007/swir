@@ -4,7 +4,7 @@ import {SwiperSlide, Swiper} from "swiper/react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import 'swiper/swiper-bundle.min.css'
 import SwiperCore, {Navigation, Pagination} from "swiper";
-import styles from './movies.module.css'
+import styles from '../styles/movies.module.css'
 
 
 class MovieComponent extends Component {
@@ -54,7 +54,7 @@ class MovieComponent extends Component {
                                     <Card className={styles.card}>
                                     <Card.Img src={movie.attributes.coverImage === null ? movie.attributes.posterImage.original : movie.attributes.coverImage.original } variant="top" />
                                     <Card.Body>
-                                        <Card.Title>Title: {movie.attributes.titles.en}</Card.Title>
+                                        <Card.Title>English Title: {movie.attributes.titles.en}</Card.Title>
                                         <Card.Text>{movie.attributes.synopsis}</Card.Text>
                                     </Card.Body>
                                     </Card>

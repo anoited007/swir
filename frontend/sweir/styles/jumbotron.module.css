@@ -1,4 +1,9 @@
-.main{
+.jumb-container {
+    min-height: 20vh;
+    height: auto;
+}
+
+.jumbotron-bg{
     color: #fff;
     background: linear-gradient(90deg, rgba(2,0,36,1) 27%, rgba(121,9,70,0.8) 53%, rgba(0,212,255,1) 75%);
     background: -webkit-linear-gradient(to right, rgba(2,0,36,1) 27%, rgba(121,9,70,0.8) 53%, rgba(0,212,255,1) 75%);
@@ -11,17 +16,4 @@
     overflow: hidden;
     text-shadow:0 1px 5px rgba(0,0,0,.1);
     margin: 0;
-    min-height: 100vh;
-}
-
-.form-container{
-    margin-top: 8vh;
-}
-
-.green-background {
-    background-color: #00AA9E;
-}
-
-.card-body{
-    background: #fff !important;
 }

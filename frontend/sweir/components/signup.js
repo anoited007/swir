@@ -1,10 +1,15 @@
 import {Formik} from "formik";
-import {Button, Col, Form} from "react-bootstrap";
+import {Button, Card, Col, Form} from "react-bootstrap";
 import React from "react";
 import {localBackend, remote, remoteBackend} from "../shared/sharedConstants";
 import * as yup from "yup";
+import Link from 'next/link'
+import { withRouter } from "next/router";
+import {useToasts} from "react-toast-notifications";
 
-const SignUpForm = () => {
+const SignUpForm = (props) => {
+    var attrib = props;
+    const {addToast} = useToasts();
     let requiredMsg = 'This field is required';
     const validation = yup.object({
         usernameReg: yup.string().required(requiredMsg).min(4, 'Username should be at lest 4 characters'),
@@ -32,12 +37,31 @@ const SignUpForm = () => {
             credentials: "same-origin"
 
         }).then(response => {
+           let message = 'Account has been created successfully'
             if (response.ok){
-                return response.json();
+                 response.json().
+
+                 then(response => {
+                     addToast(message, {
+                         appearance:'success',
+                         autoDismiss: true,
+                     })
+                     return attrib.router.push('/signin')
+                 });
+
+            }
+            else {
+                throw new Error(response.statusText + ";" + response.status);
             }
 
-        }).catch(response => {
-            console.log(response);
+        }).catch(error => {
+            let status = error.message.split(';')[1];
+            console.log(status)
+            let message = '';
+            switch (status){
+                case '500':
+                    message = 'Unable create account. An unknown error occurred'
+            }
            }
         )
 
@@ -61,54 +85,69 @@ const SignUpForm = () => {
                 errors,
             }) => {
                 return(
-                    <Form method="POST" onSubmit={handleSubmit}>
-                        <Form.Group controlId="forGroupUsernameReg">
-                            <Form.Control type="text" placeholder="Username" name="usernameReg" required
-                                          value={values.usernameReg}
-                                          onChange={handleChange}
-                                          isInvalid={errors.usernameReg}
-                            />
-                            <Form.Control.Feedback type="invalid"> {errors.usernameReg}</Form.Control.Feedback>
-                            <Form.Text className="text-muted">
-                                You will use this to login in the future.
-                            </Form.Text>
-                        </Form.Group>
+                    <Card className="card-margin"
+                    bg={"dark"}
+                    >
+                        <Card.Header as={"h5"}>
+                            <span>Create an account</span>
+                        </Card.Header>
+                        <Card.Body>
+                            <Form method="POST" onSubmit={handleSubmit}>
+                                <Form.Group controlId="forGroupUsernameReg">
+                                    <Form.Control type="text" placeholder="Username" name="usernameReg" required
+                                                  value={values.usernameReg}
+                                                  onChange={handleChange}
+                                                  isInvalid={errors.usernameReg}
+                                    />
+                                    <Form.Control.Feedback type="invalid"> {errors.usernameReg}</Form.Control.Feedback>
+                                    <Form.Text className="text-muted">
+                                        You will use this to login in the future.
+                                    </Form.Text>
+                                </Form.Group>
 
-                        <Form.Group controlId="forGroupEmail">
-                            <Form.Control type="email" placeholder="Email Address" name="email" required
-                                          value={values.email}
-                                          onChange={handleChange}
-                                          isInvalid={errors.email}
-                            />
-                            <Form.Control.Feedback type="invalid"> {errors.email}</Form.Control.Feedback>
+                                <Form.Group controlId="forGroupEmail">
+                                    <Form.Control type="email" placeholder="Email Address" name="email" required
+                                                  value={values.email}
+                                                  onChange={handleChange}
+                                                  isInvalid={errors.email}
+                                    />
+                                    <Form.Control.Feedback type="invalid"> {errors.email}</Form.Control.Feedback>
 
-                            <Form.Text className="text-muted">
-                                We will send updates to this email address
-                            </Form.Text>
-                        </Form.Group>
+                                    <Form.Text className="text-muted">
+                                        We will send updates to this email address
+                                    </Form.Text>
+                                </Form.Group>
 
-                        <Form.Group controlId="forGroupPasswordReg">
-                            <Form.Control type="password" placeholder="Enter Password" name="passwordReg" required
-                                          value={values.passwordReg}
-                                          onChange={handleChange}
-                                          isInvalid={errors.passwordReg}
-                            />
-                            <Form.Control.Feedback type="invalid"> {errors.passwordReg}</Form.Control.Feedback>
-                        </Form.Group>
+                                <Form.Group controlId="forGroupPasswordReg">
+                                    <Form.Control type="password" placeholder="Enter Password" name="passwordReg" required
+                                                  value={values.passwordReg}
+                                                  onChange={handleChange}
+                                                  isInvalid={errors.passwordReg}
+                                    />
+                                    <Form.Control.Feedback type="invalid"> {errors.passwordReg}</Form.Control.Feedback>
+                                </Form.Group>
 
-                        <Form.Group controlId="forGroupPasswordRegConf">
-                            <Form.Control type="password" placeholder="Verify Password" name="passwordRegConf" required
-                                          value={values.passwordRegConf}
-                                          onChange={handleChange}
-                                          isInvalid={errors.passwordRegConf}
-                            />
-                            <Form.Control.Feedback type="invalid"> {errors.passwordRegConf}</Form.Control.Feedback>
-                        </Form.Group>
+                                <Form.Group controlId="forGroupPasswordRegConf">
+                                    <Form.Control type="password" placeholder="Verify Password" name="passwordRegConf" required
+                                                  value={values.passwordRegConf}
+                                                  onChange={handleChange}
+                                                  isInvalid={errors.passwordRegConf}
+                                    />
+                                    <Form.Control.Feedback type="invalid"> {errors.passwordRegConf}</Form.Control.Feedback>
+                                </Form.Group>
 
-                        <Button type="submit" variant="primary"> Sign Up </Button>
+                                <Button type="submit" variant="primary"> Sign Up </Button>
 
-                    </Form>
+                            </Form>
 
+                            <Card.Footer>
+                                <span>Already have an account? <Link href={"/"}>
+                                    <a>Sign In</a>
+                                </Link>
+                                </span>
+                            </Card.Footer>
+                        </Card.Body>
+                    </Card>
                 )
             }
         }
@@ -117,4 +156,4 @@ const SignUpForm = () => {
         </Formik>
     )
 }
-export default SignUpForm;
+export default withRouter(SignUpForm);
