@@ -17,4 +17,11 @@ h3  {
     margin-top: 15vh;
 }
 
+.slick-dots{
+    z-index: 10000;
+}
+
+.slick-prev:before, .slick-next:before{
+    color: #dc3545 !important;
+}
 

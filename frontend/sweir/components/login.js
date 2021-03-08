@@ -39,7 +39,7 @@ const LoginForm = (props) => {
         }).then(response => {
             if (response.ok){
                return  response.json().then(data =>{
-                   console.log(data);
+                   // console.log(data);
                    setCookie('user', data, {
                        path: "/",
                        maxAge: 3600,
@@ -79,7 +79,6 @@ const LoginForm = (props) => {
                         autoDismiss: true,
                     })
                     return;
-
             }
         })
     }
