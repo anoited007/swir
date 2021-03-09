@@ -45,7 +45,15 @@ const LoginForm = (props) => {
                        maxAge: 3600,
                        sameSite: true,
                    })
-                   return attrib.router.push('/jokes');
+                   let path = attrib.router.pathname;
+                   if (path === '/'){
+                       return attrib.router.push('/jokes');
+                   }
+                    else {
+                        return attrib.router.push(path);
+                   }
+
+
                });
             }
             else {

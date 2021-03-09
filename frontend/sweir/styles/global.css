@@ -21,7 +21,15 @@ h3  {
     z-index: 10000;
 }
 
+.slick-slider{
+    width: 100%;
+}
+
 .slick-prev:before, .slick-next:before{
     color: #dc3545 !important;
 }
 
+.card-img, .card-img-bottom, .card-img-top {
+    height: 300px !important;
+    max-height: 300px !important;
+}

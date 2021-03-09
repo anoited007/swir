@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {movieApi} from "../shared/sharedConstants";
-import {SwiperSlide, Swiper} from "swiper/react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import 'swiper/swiper-bundle.min.css'
-import SwiperCore, {Navigation, Pagination} from "swiper";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import styles from '../styles/movies.module.css'
+import Slider from "react-slick";
 
 
 class MovieComponent extends Component {
@@ -27,45 +28,42 @@ class MovieComponent extends Component {
 
         ).then(response => {
             this.setState({movies: response.data})
-            console.log(response.data);
+            // console.log(response.data);
             }
         ).catch(error => {
-            console.log(error);
+            // console.log(error);
+            return null;
         })
     }
 
     render() {
-        SwiperCore.use([Navigation, Pagination ]);
+        const settings = {
+            infinite: true,
+            speed: 800,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            accessibility: true,
+        };
+
         return(
-            <Container fluid={"md"} className={styles.containerMd}>
+            <Container  className={"content-row"}>
+                <Row >
 
-
-                        <Swiper
-                            className={"row"}
-                            spaceBetween={50}
-                            slidesPerView={3}
-                            navigation
-                            pagination={{ clickable: true }}
-                            scrollbar={{ draggable: true }}
-                        >
+                        <Slider {...settings}>
                             { this.state.movies.map( (movie, index) => (
-                                <Col key={index}>
-                                <SwiperSlide key={index}    >
-                                    <Card className={styles.card}>
+                                <Col key={index} md={{span: 6, offset:3}}>
+                                    <Card>
                                     <Card.Img src={movie.attributes.coverImage === null ? movie.attributes.posterImage.original : movie.attributes.coverImage.original } variant="top" />
                                     <Card.Body>
-                                        <Card.Title>English Title: {movie.attributes.titles.en}</Card.Title>
+                                        <Card.Title>Title: {movie.attributes.titles.en === undefined ? movie.attributes.titles.en_jp : movie.attributes.titles.en}</Card.Title>
                                         <Card.Text>{movie.attributes.synopsis}</Card.Text>
                                     </Card.Body>
                                     </Card>
-                                </SwiperSlide>
                                 </Col>
                             ))}
 
-                        </Swiper>
-
-
-
+                        </Slider>
+                </Row>
 
            </Container>
         )
