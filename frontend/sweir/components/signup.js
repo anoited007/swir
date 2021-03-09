@@ -88,8 +88,8 @@ const SignUpForm = (props) => {
                     <Card className="card-margin"
                     bg={"dark"}
                     >
-                        <Card.Header as={"h5"}>
-                            <span>Create an account</span>
+                        <Card.Header as={"h2"}>
+                            <span className="text-center">Create an account</span>
                         </Card.Header>
                         <Card.Body>
                             <Form method="POST" onSubmit={handleSubmit}>
