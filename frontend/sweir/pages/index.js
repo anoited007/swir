@@ -8,10 +8,6 @@ import styles from "../styles/index.module.css"
 const Home = () => {
         return (
             <>
-                <Head>
-                    <title>Software Engineer in Residence</title>
-                    <link rel="icon" href="/favicon.ico" />
-                </Head>
 
                 <main className={styles.main}>
                     <Container>
