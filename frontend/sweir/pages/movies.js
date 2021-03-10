@@ -5,11 +5,18 @@ import {loggedIn} from "./jokes";
 import Home from "./index";
 import {withCookies} from "react-cookie";
 import CustomJumbotron from "../components/jumbotron";
+import {useEffect, useState} from "react";
 
 const Movies = (props) => {
+    const [hasMounted, setMounted] = useState(false)
     const content = "Check out some of the anime with rating of PG and were released in winter."
 
-    if (loggedIn(props)){
+    useEffect( () => {
+        setMounted(true);
+    }, [])
+
+
+    if (hasMounted && loggedIn(props)){
         return(
             <Layout>
                 <CustomJumbotron content={content} />
