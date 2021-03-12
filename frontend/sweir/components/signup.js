@@ -46,7 +46,7 @@ const SignUpForm = (props) => {
                          appearance:'success',
                          autoDismiss: true,
                      })
-                     return attrib.router.push('/signin')
+                     return attrib.router.push('/')
                  });
 
             }
@@ -60,8 +60,17 @@ const SignUpForm = (props) => {
             let message = '';
             switch (status){
                 case '500':
-                    message = 'Unable create account. An unknown error occurred'
+                    message = 'Unable to create account. An unknown error occurred'
+                    return
+
+                default:
+                    message = 'Unable to create account. Try again later'
             }
+            addToast(message, {
+                appearance:'error',
+                autoDismiss: true,
+            })
+
            }
         )
 
