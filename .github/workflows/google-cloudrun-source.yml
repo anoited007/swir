@@ -79,4 +79,4 @@ jobs:
         run: |-
          cat "${{ steps.auth.outputs.credentials_file_path }}" | jq -r tostring
          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-         gcloud services list
+         gcloud compute instances list
