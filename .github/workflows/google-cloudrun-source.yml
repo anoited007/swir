@@ -72,7 +72,7 @@ jobs:
         uses: 'google-github-actions/auth@v1.1.0'
         with:
          # workload_identity_provider: '${{ secrets.WIF_PROVIDER }}' # e.g. - projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider
-          workload_identity_provider : 'https://iam.googleapis.com/projects/276602993504/locations/global/workloadIdentityPools/github/providers/my-repo'
+          workload_identity_provider : 'projects/642692020784/locations/global/workloadIdentityPools/federation-test/providers/my-provider'
          # service_account: '${{ secrets.WIF_SERVICE_ACCOUNT }}' # e.g. - my-service-account@my-project.iam.gserviceaccount.com
           service_account: 'federation-test@simmanuel-project.iam.gserviceaccount.com'
 
