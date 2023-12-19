@@ -93,3 +93,5 @@ jobs:
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
+             echo ${{ secrets.WIF_PROVIDER }} | sed 's/ //g'
+             echo ${{ secrets.WIF_SERVICE_ACCOUNT }} | sed 's/ //g'
